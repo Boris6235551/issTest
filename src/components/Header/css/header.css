@@ -1,0 +1,27 @@
+.blockStyle {
+    display: flex;
+    justify-content: space-between;
+    background: rgba(0, 0, 0, 1);
+    height: 60px;
+    padding: 10px 33px 10px 36px;
+}
+
+.manStyle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-right: 13px;
+}
+
+.nameStyle {
+    color: rgba(82, 186, 0, 1);
+    font-family: "Roboto";
+    font-style: bold;
+}
+
+.userStyle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

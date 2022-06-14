@@ -1,0 +1,122 @@
+.box {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.box input {
+    width: 50%;
+    margin-top: 10px;
+    border-radius: 8px;
+    border: #AEAEAE solid 1px;
+}
+
+.filterBlock {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-height: 40px;
+    width: 50%;
+    margin: 10px 0 10px 0;
+    padding: 0 5px 0 5px;
+}
+
+.filter button {
+    border: none;
+    background-color: transparent;
+}
+
+.filter button:hover {
+    color: rgba(82, 186, 0, 1);
+}
+
+/* .filter:hover {
+    filter: hue-rotate(300deg);
+  transition: 0.5s;
+} */
+
+.filter {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0 20px 0;
+    /* background-image: url("../img/XMLID_29_.svg"); */
+    /* background-repeat: no-repeat; */
+}
+
+.filter :nth-child(2n) {
+    margin: 0 10px 0 5px;
+}
+
+.filterBlockButton {
+    border: none;
+    background-color: rgba(243, 85, 85, 1);
+    color: rgba(255, 255, 255, 1);
+    border-radius: 4px;
+}
+
+.filterBlockButton:hover { 
+    background-color: rgba(178, 8, 8, 1);
+}
+
+.elementBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.element {
+    border: 1px rgba(0, 0, 0, 1) solid;
+    margin-bottom: 10px;
+    width: 50%;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 1);
+    font-family: Roboto;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.elementHeader {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    padding: 12px 10px 12px 10px;
+}
+
+.elementTitleIdBlock { 
+    display: flex;
+}
+
+.elementHeader button {
+    border: none;
+    background-color: transparent;
+}
+
+.elementId {
+    height: 26px;
+    width: 44px;
+    border-radius: 8px;
+    border: 1px solid #D7D7D7;
+    text-align: center;
+    background-color: #F0F0F0;
+    color: #4E4E4E;
+    margin: 0 14px 0 14px;
+}
+
+.elementBody {
+    padding: 15px 10px 15px 10px;
+}
+
+.switch {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.switch path {
+    fill: rgba(0, 0, 0, 1);
+}
+
+.switch:hover path {
+    fill: rgba(82, 186, 0, 1);
+
+}
