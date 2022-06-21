@@ -11,7 +11,7 @@ class Header extends Component {
              
                     <img src={Vector} />
             
-                <div className="userStyle">
+                <div className="userStyle" style= {{ display: (this.props.name != null) ? "flex" : "none" }}>
                     <div className="manStyle">
                         <img src={XMLID_792_} />
                         <img src={XMLID_795_} />

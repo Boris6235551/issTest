@@ -1,6 +1,6 @@
-const path = require("path");
+// const path = require("path");
    
-module.exports = {
-    mode: "development",
+// module.exports = {
+//     mode: "development",
 
-}
+// }

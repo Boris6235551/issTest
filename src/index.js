@@ -7,7 +7,6 @@ import thunk from 'redux-thunk'
 import { createLogger } from 'redux-logger'
 import reducer from './reducers'
 import App from './App'
-import registerServiceWorker from './registerServiceWorker'
 import './css/index.css'
 
 const middleware = [thunk]
@@ -25,4 +24,3 @@ ReactDOM.createRoot(document.getElementById('root'))
             </BrowserRouter>
         </Provider>
     )
-registerServiceWorker()

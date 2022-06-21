@@ -2,14 +2,21 @@
     display: flex;
     align-items: center;
     flex-direction: column;
+    font-family: 'Roboto', sans-serif;   
 }
 
 .box input {
     width: 50%;
+    height: 38px;
     margin-top: 10px;
     border-radius: 8px;
     border: #AEAEAE solid 1px;
+    padding-left: 12px;
 }
+
+.box input::placeholder {
+    color: rgba(174, 174, 174, 1);
+  }
 
 .filterBlock {
     display: flex;
@@ -26,25 +33,10 @@
     background-color: transparent;
 }
 
-.filter button:hover {
-    color: rgba(82, 186, 0, 1);
-}
-
-/* .filter:hover {
-    filter: hue-rotate(300deg);
-  transition: 0.5s;
-} */
-
 .filter {
     display: flex;
     justify-content: center;
     margin: 20px 0 20px 0;
-    /* background-image: url("../img/XMLID_29_.svg"); */
-    /* background-repeat: no-repeat; */
-}
-
-.filter :nth-child(2n) {
-    margin: 0 10px 0 5px;
 }
 
 .filterBlockButton {
@@ -54,7 +46,7 @@
     border-radius: 4px;
 }
 
-.filterBlockButton:hover { 
+.filterBlockButton:hover {
     background-color: rgba(178, 8, 8, 1);
 }
 
@@ -82,7 +74,7 @@
     padding: 12px 10px 12px 10px;
 }
 
-.elementTitleIdBlock { 
+.elementTitleIdBlock {
     display: flex;
 }
 
@@ -120,3 +112,34 @@
     fill: rgba(82, 186, 0, 1);
 
 }
+
+.arrowBlock {
+    margin-right: 10px;
+}
+
+.arrowBlock:hover .arrow { 
+    fill: rgba(82, 186, 0, 1);
+    ;
+}
+
+.arrowBlock:hover .arrowButton { 
+    color: rgba(82, 186, 0, 1);
+    ;
+}
+
+.arrow {
+    width: 10px;
+    height: 15px;
+    fill: rgba(0, 0, 0, 1);
+}
+
+.arrowButton {
+    color: rgba(0, 0, 0, 1);
+}
+
+.daw:hover path{
+    fill: rgba(82, 186, 0, 1);
+}
+
+
+

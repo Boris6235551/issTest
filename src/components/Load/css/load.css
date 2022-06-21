@@ -1,0 +1,64 @@
+@keyframes skeleton-animation {
+
+    0% {
+        right: 100%;
+    }
+
+    50% {
+        right: -128px;
+    }
+
+    100% {
+        right: 100%;
+    }
+
+}
+
+.skeleton {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    overflow: hidden;
+    width: 328px;
+    height: 100px;
+    display: grid;
+    grid-template-columns: 128px 200px;
+    grid-gap: 8px;
+    margin-bottom: 16px;
+}
+
+.skeleton:before {
+    display: block;
+    position: absolute;
+    width: 128px;
+    height: 100px;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0), #FFF, rgba(255, 255, 255, 0));
+    content: "";
+    animation: skeleton-animation 1.25s infinite;
+}
+
+.skeleton .s-img {
+    width: 128px;
+    height: 100px;
+    background: rgb(192, 188, 188);
+    grid-row: 1 / 4;
+}
+
+.skeleton .s-line {
+    height: 20px;
+    background: rgb(192, 188, 188);
+}
+
+.skeleton .s-line.first {
+    width: 100%
+}
+
+.skeleton .s-line.second {
+    width: 75%
+}
+
+.skeleton .s-line.third {
+    width: 50%
+}

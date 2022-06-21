@@ -1,30 +1,71 @@
 import React from 'react'
+import { Suspense } from 'react'
 import './css/list.css'
-import XMLID_29_ from './img/XMLID_29_.svg'
+import { ReactComponent as Arrow } from './img/XMLID_29_.svg'
+import { ReactComponent as Daw } from './img/Vector.svg'
+import Load from '../Load/Load'
 
-let green;
+const defaultState = {
+    arrowIdRotate: null,
+    arrowHeaderRotate: null,
+    buttonIdcolor: null,
+    buttonHeadercolor: null,
+    stateSortById: true,
+    stateSortByHeader: true,
+}
 
 class List extends React.Component {
-
-    state = { stateSortById: true, stateSortByHeader: true }
+    constructor(props) {
+        super(props);
+        this.state = defaultState
+    }
 
     cardClick = (key) => {
         this.props.display([...this.props.data], key)
     };
 
     sortByIdClick = () => {
-        green = { color: 'rgba(82, 186, 0, 1)' }
+        this.setState({
+            buttonIdcolor: { color: "rgba(82, 186, 0, 1)" },
+            arrowHeaderRotate: { transform: "rotate(0deg)" },
+            buttonHeadercolor: null,
+            stateSortByHeader: true,
+            arrowIdRotate: this.state.stateSortById ?
+                { transform: "rotate(180deg)", fill: "rgba(82, 186, 0, 1)" } : { transform: "rotate(0deg)", fill: "rgba(82, 186, 0, 1)" },
+            stateSortById: this.state.stateSortById ? false : true
+        })
         this.props.sortById([...this.props.data], this.state.stateSortById)
-        this.state.stateSortById = this.state.stateSortById ? false : true
     };
 
     sortByHeaderClick = () => {
-        green = { color: 'rgba(82, 186, 0, 1)' }
+        this.setState({
+            buttonHeadercolor: { color: "rgba(82, 186, 0, 1)" },
+            arrowIdRotate: { transform: "rotate(0deg)" },
+            buttonIdcolor: null,
+            stateSortById: true,
+            arrowHeaderRotate: this.state.stateSortByHeader ?
+                { transform: "rotate(180deg)", fill: "rgba(82, 186, 0, 1)" } : { transform: "rotate(0deg)", fill: "rgba(82, 186, 0, 1)" },
+            stateSortByHeader: this.state.stateSortByHeader ? false : true
+        })
         this.props.sortByHeader([...this.props.data], this.state.stateSortByHeader)
-        this.state.stateSortByHeader = this.state.stateSortByHeader ? false : true
+    };
+
+    search = e => {
+        const value = e.currentTarget.value
+        console.log(value)
+        this.props.onFind(value)
+    }
+
+    resetFilter = () => {
+        this.setState(defaultState)
+        this.props.sortById([...this.props.data])
     };
 
     render() {
+        let load
+        if (this.props.data.length == 0) {
+            load = <Load />
+        }
         const arr = this.props.data.map((element, key) => (
             <div key={element.id} className="element">
                 <div className="elementHeader">
@@ -38,35 +79,41 @@ class List extends React.Component {
                     </div>
                     <div className="elementShowButton">
                         <button onClick={() => this.cardClick(key)}>
-                            <svg style={this.props.data[key].isClose ? { transform: 'rotate(90deg)' } : { transform: 'rotate(270deg)' }}
-                                className="switch" viewBox="0 0 5 9">
-                                <path d="M0.419,9.000 L0.003,8.606 L4.164,4.500 L0.003,0.394 L0.419,0.000 L4.997,4.500 L0.419,9.000 Z" ></path>
-                            </svg>
+                        <Daw className="daw" style={{ transform: this.props.data[key].isClose ? "rotate(180deg)" : "rotate(0deg)" }} />
                         </button>
                     </div>
                 </div>
-                <div className="elementBody" style={this.props.data[key].isClose ? { display: 'none' } : null}>
+                <div className="elementBody" style={{ display: this.props.data[key].isClose ? "none" : null }}>
                     {element.body}
                 </div>
             </div>
         ))
         return (
+
             <div className="box">
                 <input
+                    type={'text'}
+                    onChange={this.search}
                     placeholder={'Поиск по теме'}
                 />
                 <div className="filterBlock">
                     <div className="filter">
-                        <button style={green} onClick={() => this.sortByIdClick()}>Идентификатор</button>
-                        <object className="string" type="image/svg+xml" data={XMLID_29_} width="20" height="20" >
-                        </object>
-                        <button style={green} onClick={() => this.sortByHeaderClick()}>Заголовок</button>
-                        <div>&#8595;</div>
+                        <div className="arrowBlock">
+                            <button className="arrowButton" style={this.state.buttonIdcolor} onClick={() => this.sortByIdClick()}>Идентификатор</button>
+                            <Arrow className="arrow" style={this.state.arrowIdRotate} />
+                        </div>
+                        <div className="arrowBlock">
+                            <button className="arrowButton" style={this.state.buttonHeadercolor} onClick={() => this.sortByHeaderClick()}>Заголовок</button>
+                            <Arrow className="arrow" style={this.state.arrowHeaderRotate} />
+                        </div>
                     </div>
-                    <button className="filterBlockButton">Сбросить фильтры</button>
+                    <button className="filterBlockButton" onClick={() => this.resetFilter()}>Сбросить фильтры</button>
                 </div>
                 <div className="elementBox">
+                    {/* <Suspense fallback={<Load />}> */}
                     {arr}
+                    {load}
+                    {/* </Suspense> */}
                 </div>
             </div>
         )
