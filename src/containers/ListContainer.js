@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import List from '../components/List/List'
-import { display, sortById, sortByHeader, search } from '../actions/Actions'
+import { display, sortById, sortByHeader } from '../actions/Actions'
 
 const mapDispatchToProps = dispatch => ({
     display: (data, key) => { dispatch(display(data, key)) },

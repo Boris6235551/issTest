@@ -1,114 +1,77 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Navigate } from 'react-router-dom'
 import './css/login.css'
 
-class Login extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            colorBorderInputLogin: { borderColor: 'rgba(174, 174, 174, 1)' },
-            colorBorderInputPassword: { borderColor: 'rgba(174, 174, 174, 1)' },
-            redirect: false,
-            username: '',
-            password: '',
-        }
-    }
+export default function Login(props) {
 
-    handleSubmit = e => {
+    const [colorBorderInputLogin, setBorderInputLogin] = React.useState({ borderColor: 'rgba(174, 174, 174, 1)' });
+    const [colorBorderInputPassword, setBorderInputPassword] = React.useState({ borderColor: 'rgba(174, 174, 174, 1)' });
+    const [redirect, setRedirect] = React.useState(false);
+    const [username, setUserName] = React.useState('');
+    const [password, setPassword] = React.useState('');
+
+    const handleSubmit = e => {
         e.preventDefault()
-        const { username, password } = this.state
-        this.props.logIn(
+        props.logIn(
             {
                 username,
                 password,
             },
-            () => {
-                this.setState({ redirect: true })
-            }
+            () => setRedirect({ redirect: true })
         )
     }
 
-    handleChange = e => {
-        const value = e.currentTarget.value
-        const fieldName = e.currentTarget.dataset.fieldName
-        this.props.deleteErrorMessage()
-        this.setState(prev => (
-            {
-                ...prev,
-                [fieldName]: value,
-            }))
+    const handleChangeLogin = (e) => {
+        setUserName(e.currentTarget.value)
+        props.deleteErrorMessage()
     }
 
-    focusLogin = () => {
-        this.setState(prev => (
-            {
-                ...prev,
-                colorBorderInputLogin: { borderColor: 'rgba(82, 186, 0, 1)' }
-            }))
+    const handleChangePassword = (e) => {
+        setPassword(e.currentTarget.value)
+        props.deleteErrorMessage()
     }
 
-    blurLogin = () => {
-        this.setState(prev => (
-            {
-                ...prev,
-                colorBorderInputLogin: { borderColor: 'rgba(174, 174, 174, 1)' }
-            }))
+    const focusLogin = () => setBorderInputLogin({ borderColor: 'rgba(82, 186, 0, 1)' })
+
+    const blurLogin = () => setBorderInputLogin({ borderColor: 'rgba(174, 174, 174, 1)' })
+
+    const focusPassword = () => setBorderInputPassword({ borderColor: 'rgba(82, 186, 0, 1)' })
+
+    const blurPassword = () => setBorderInputPassword({ borderColor: 'rgba(174, 174, 174, 1)' })
+
+    const { errorType, errorMsg } = props
+
+    if (redirect) {
+        return <Navigate to={'/list'} />
     }
 
-    focusPassword = () => {
-        this.setState(prev => (
-            {
-                ...prev,
-                colorBorderInputPassword: { borderColor: 'rgba(82, 186, 0, 1)' }
-            }))
-    }
-
-    blurPassword = () => {
-        this.setState(prev => (
-            {
-                ...prev,
-                colorBorderInputPassword: { borderColor: 'rgba(174, 174, 174, 1)' }
-            }))
-    }
-
-    render() {
-        const { errorType, errorMsg } = this.props
-        const { username, password, redirect } = this.state
-
-        if (redirect) {
-            return <Navigate to={'/list'} />
-        }
-
-        return (
-            <div className="loginFormStyle">
-                <form className="formStyle" onSubmit={this.handleSubmit}>
-                    <div className="textFormFieldStyle">Кто ты, путник?</div>
-                    <input
-                        data-field-name={'username'}
-                        type={'text'}
-                        onChange={this.handleChange}
-                        placeholder={'Логин'}
-                        value={username}
-                        style={(errorType == 'loginError') ? { borderColor: 'red' } : this.state.colorBorderInputLogin}
-                        onFocus={this.focusLogin}
-                        onBlur={this.blurLogin}
-                    />
-                    <input
-                        data-field-name={'password'}
-                        type={'text'}
-                        onChange={this.handleChange}
-                        placeholder={'Пароль'}
-                        value={password}
-                        style={(errorType == 'passwordError') ? { borderColor: 'red' } : this.state.colorBorderInputPassword}
-                        onFocus={this.focusPassword}
-                        onBlur={this.blurPassword}
-                    />
-                    <div className="errorMsg">{errorMsg}</div>
-                    <button type="submit">Погнали!</button>
-                </form>
-            </div>
-        )
-    }
+    return (
+        <div className="loginFormStyle">
+            <form className="formStyle" onSubmit={handleSubmit}>
+                <div className="textFormFieldStyle">Кто ты, путник?</div>
+                <input
+                    data-field-name={'username'}
+                    type={'text'}
+                    onChange={handleChangeLogin}
+                    placeholder={'Логин'}
+                    value={username}
+                    style={(errorType == 'loginError') ? { borderColor: 'red' } : colorBorderInputLogin}
+                    onFocus={focusLogin}
+                    onBlur={blurLogin}
+                />
+                <input
+                    data-field-name={'password'}
+                    type={'text'}
+                    onChange={handleChangePassword}
+                    placeholder={'Пароль'}
+                    value={password}
+                    style={(errorType == 'passwordError') ? { borderColor: 'red' } : colorBorderInputPassword}
+                    onFocus={focusPassword}
+                    onBlur={blurPassword}
+                />
+                <div className="errorMsg">{errorMsg}</div>
+                <button type="submit">Погнали!</button>
+            </form>
+        </div>
+    )
 }
-
-export default Login
